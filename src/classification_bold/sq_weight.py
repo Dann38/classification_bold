@@ -3,6 +3,7 @@ import cv2
 from sklearn.cluster import KMeans
 from classification_bold.heterogeneity_row import is_heterogeneity_row
 
+
 def evaluation_fun(img):
     black = (255 - img).mean()
     return black
@@ -47,7 +48,7 @@ def styles_words(img, box):
     return style_words, bold_style, regular_style, delta_kmeans
 
 
-def classifier_sq_weight(img, box):
+def classifier(img, box):
     N = len(box)
     style_words_, bold_style, regular_style, delta_kmeans = styles_words(img, box)
     style_words = []

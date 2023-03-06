@@ -2,11 +2,11 @@ import os
 import cv2
 import numpy as np
 
-PATH_IMG = r"C:\Users\danii\program\python\project\classification_bold\scripts\img-row"
+PATH_IMG = r"C:\Users\danii\program\python\project\classification_bold\scripts\ds-g-img"
 
 WIDTH = 600
 HEIGHT = 800
-TEXT_IMG = 0.3
+TEXT_IMG = 0.6
 OFFSET_ROW = 2
 BOLD_ROW = 1
 REGULAR_ROW = 0
@@ -15,6 +15,21 @@ COLOR_OFFSET_ROW = (0, 0, 255)
 COLOR_BOLD_ROW = (255, 0, 0)
 COLOR_REGULAR_ROW = (0, 255, 0)
 
+def get_img_files():
+    files = []
+    k = 0
+    for name_file in os.listdir(PATH_IMG):
+        if name_file[-4:] == ".npy":
+            files.append(name_file[:-4])
+            print(f"{k}: {files[-1]}")       
+            k += 1
+    return files
+
+def without_offset(box):
+    for i in range(len(box)):
+        if box[i][0] == OFFSET_ROW:
+            box[i][0] = BOLD_ROW
+    return box
 
 def get_row_image(path_img):
     img = read_img(path_img)
